@@ -1,21 +1,18 @@
-import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
-
 dotenv.config();
+import connectDB from "./db/connect.js";
+import app from "./app.js";
 
-const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use(cors());
+app.get("/", (req, res) => res.send("Extracto Backend Running ... "));
 
-app.get("/", (req, res) => {
-  res.send("Extracto Backend running ... ");
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(` Server is listening at port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("MongoDb Connection failed: ", err);
+  });
