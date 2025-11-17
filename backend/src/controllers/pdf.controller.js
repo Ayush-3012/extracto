@@ -1,6 +1,8 @@
 import fs from "fs";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import File from "../models/file.model.js";
+import { embedChunks } from "../utils/embedder.js";
+import { upsertChunksToPinecone } from "../utils/upsertToPinecone.js";
 
 // helper: chunk by approx n chars
 function chunkText(text, chunkSize = 3000) {
@@ -57,19 +59,16 @@ export const uploadPdf = async (req, res) => {
     if (!req.file) return res.status(400).json({ message: "No file uploaded" });
 
     const filePath = req.file.path;
-    const fileBuffer = fs.readFileSync(filePath);
 
     // 1) Extract text from PDF
     const { text, numpages } = await extractTextFromPDF(filePath);
     console.log("Extracted text length:", text.length);
     console.log("Pages:", numpages);
 
-    // const fullText = data && data.text ? data.text.replace(/\r/g, "") : "";
-
     // 2) chunk text
     const chunks = chunkText(text, 3000); // adjust size as needed
 
-    // 3) save file meta to MongoDB (optional but recommended)
+    // 3) save file meta to MongoDB
     let savedFile;
     try {
       savedFile = await File.create({
@@ -84,12 +83,30 @@ export const uploadPdf = async (req, res) => {
       console.warn("Mongo save failed:", err.message);
     }
 
-    // 4) delete temp file
+    // 4) Generate embeddings for chunks
+    console.log("⏳ Generating embeddings...");
+    const embeddings = await embedChunks(chunks);
+    console.log("✅ Embeddings generated:", embeddings.length);
+
+    // 5) Upsert into Pinecone
+    if (savedFile) {
+      console.log("⏳ Uploading vectors to Pinecone...");
+      await upsertChunksToPinecone({
+        fileId: savedFile._id.toString(),
+        chunks,
+        embeddings,
+        carrier: req.body.carrier || null,
+        product: req.body.product || null,
+      });
+      console.log("🔥 Vector upsert complete!");
+    }
+
+    // 6) delete temp file
     fs.unlink(filePath, (err) => {
       if (err) console.warn("Failed to delete temp PDF:", err.message);
     });
 
-    // 5) return response (for testing, return first 3 chunks)
+    // 7) return response
     return res.json({
       success: true,
       message: "PDF parsed and chunks created",
