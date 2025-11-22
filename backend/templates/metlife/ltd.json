@@ -1,0 +1,105 @@
+{
+  "carrier": "MetLife",
+  "product": "LTD (Long Term Disability)",
+  "fields": {
+    "policy_number": {
+      "keywords": ["policy number", "group policy number"]
+    },
+
+    "eligible_class": {
+      "keywords": ["eligible class", "eligible employees", "eligibility"]
+    },
+
+    "minimum_hours": {
+      "keywords": [
+        "minimum hours",
+        "hours per week",
+        "actively at work",
+        "minimum work hours"
+      ]
+    },
+
+    "benefit_percentage": {
+      "keywords": [
+        "benefit percentage",
+        "percentage of income",
+        "monthly benefit percent",
+        "benefit %"
+      ]
+    },
+
+    "max_covered_earnings": {
+      "keywords": [
+        "covered earnings",
+        "maximum covered earnings",
+        "covered monthly salary"
+      ]
+    },
+
+    "max_monthly_benefit": {
+      "keywords": [
+        "maximum monthly benefit",
+        "max monthly benefit",
+        "monthly maximum"
+      ]
+    },
+
+    "min_monthly_benefit": {
+      "keywords": ["minimum monthly benefit", "minimum benefit"]
+    },
+
+    "elimination_period": {
+      "keywords": ["elimination period", "waiting period", "EP", "waiting"]
+    },
+
+    "maximum_benefit_period": {
+      "keywords": [
+        "maximum benefit period",
+        "benefit duration",
+        "to Age",
+        "duration",
+        "maximum period"
+      ]
+    },
+
+    "definition_of_disability": {
+      "keywords": [
+        "definition of disability",
+        "totally disabled",
+        "partial disability",
+        "material duties"
+      ]
+    },
+
+    "pre_existing_condition": {
+      "keywords": [
+        "pre-existing condition",
+        "pre ex",
+        "lookback",
+        "preexisting"
+      ]
+    },
+
+    "mental_nervous_limitation": {
+      "keywords": [
+        "mental nervous",
+        "mental disorder",
+        "nervous disorder",
+        "24 month limitation"
+      ]
+    },
+
+    "drug_alcohol_limitation": {
+      "keywords": [
+        "drug abuse",
+        "alcohol abuse",
+        "substance abuse",
+        "chemical dependency"
+      ]
+    },
+
+    "exclusions": {
+      "keywords": ["exclusions", "not covered", "excluded", "limitations"]
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "carrier": "MetLife",
+  "product": "STD (Short Term Disability)",
+  "fields": {
+    "Weekly_Benefit": {
+      "label": "Weekly Benefit Amount",
+      "description": "Employee-elected weekly disability benefit.",
+      "pattern_examples": [
+        "Multiples of $50",
+        "$100 minimum",
+        "subject to reductions"
+      ]
+    },
+
+    "Maximum_Weekly_Benefit": {
+      "label": "Maximum Weekly Benefit",
+      "description": "Highest weekly payout allowed.",
+      "pattern_examples": [
+        "lesser of $1,000",
+        "60% of Predisability Earnings"
+      ]
+    },
+
+    "Minimum_Weekly_Benefit": {
+      "label": "Minimum Weekly Benefit",
+      "description": "Lowest weekly benefit after reductions.",
+      "pattern_examples": [
+        "15% of Weekly Benefit",
+        "$50 minimum"
+      ]
+    },
+
+    "Elimination_Period": {
+      "label": "Elimination Period",
+      "description": "Days of disability before benefit begins.",
+      "pattern_examples": [
+        "14 days Injury",
+        "14 days Sickness"
+      ]
+    },
+
+    "Maximum_Benefit_Period": {
+      "label": "Maximum Benefit Duration",
+      "description": "Total allowed benefit duration.",
+      "pattern_examples": [
+        "11 weeks"
+      ]
+    },
+
+    "Rehabilitation_Incentives": {
+      "label": "Rehabilitation Incentives",
+      "description": "Extra benefits for joining rehab program.",
+      "pattern_examples": [
+        "Yes",
+        "Weekly Benefit increased by 10%"
+      ]
+    },
+
+    "Organ_Donor_Benefit": {
+      "label": "Organ Donor Benefit",
+      "description": "Extra benefit if disability is due to organ transplant.",
+      "pattern_examples": [
+        "10% additional Weekly Benefit"
+      ]
+    },
+
+    "Income_That_Reduces_Benefit": {
+      "label": "Income That Reduces Benefit",
+      "description": "Other income sources that decrease disability payout.",
+      "pattern_examples": [
+        "Retirement benefits",
+        "Government programs",
+        "Sick pay or salary continuation",
+        "Disability benefits from other sources"
+      ]
+    },
+
+    "Income_Not_Reducing_Benefit": {
+      "label": "Income That Does Not Reduce Benefit",
+      "description": "Income that does NOT affect payout.",
+      "pattern_examples": [
+        "Cost of living adjustments",
+        "Attorney fees",
+        "Group credit insurance",
+        "Mortgage disability",
+        "Veteran benefits"
+      ]
+    },
+
+    "PreExisting_Condition_Limit": {
+      "label": "Pre-Existing Condition Clause",
+      "description": "Rules for excluding pre-existing disabilities.",
+      "pattern_examples": [
+        "3-month lookback",
+        "12 months active work required"
+      ]
+    },
+
+    "Exclusions": {
+      "label": "General Exclusions",
+      "description": "Causes of disability that are not covered.",
+      "pattern_examples": [
+        "War",
+        "Riot",
+        "Self-inflicted injury",
+        "Attempted suicide",
+        "Felony participation",
+        "Elective cosmetic surgeries"
+      ]
+    }
+  }
+}
