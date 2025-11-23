@@ -4,40 +4,39 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
-const MODEL = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
+// const MODEL = process.env.GROQ_MODEL || "llama-3.1-8b-instant";
 
 export async function askLLM(prompt) {
   try {
-    const res = await client.chat.completions.create({
-      model: MODEL,
+    const completion = await client.chat.completions.create({
+      model: "llama-3.1-8b-instant",
       messages: [
         {
           role: "system",
-          content: "You are an insurance policy extraction expert.",
+          content: "Return ONLY valid JSON. No text, no comments.",
         },
         { role: "user", content: prompt },
       ],
-      temperature: 0.1,
-      max_tokens: 200,
+      response_format: { type: "json_object" },
     });
 
-    return res.choices[0].message.content;
+    return completion.choices[0].message.content;
   } catch (err) {
-    console.error("❌ LLM Error:", err.response?.data || err.message);
-    return null;
+    console.error("❌ LLM Error:", err);
+    return "{}";
   }
 }
 
-export function buildExtractionPrompt(fieldName, context) {
-  return `
-Extract ONLY the value for: "${fieldName}"
+// export function buildExtractionPrompt(fieldName, context) {
+//   return `
+// Extract ONLY the value for: "${fieldName}"
 
-From this insurance policy text:
+// From this insurance policy text:
 
-${context}
+// ${context}
 
-Rules:
-- Only return the value (no explanation)
-- If not found, return "null"
-`;
-}
+// Rules:
+// - Only return the value (no explanation)
+// - If not found, return "null"
+// `;
+// }
